@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B8FC0AA0-D679-47C7-88A4-6B6686FE26DC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OS-X-Logger</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>037E59FDC1C6B6EECE4414ECBE4CF6923EA9CB6A</key>
+		<string>https://github.com/Eltrien/OS-X-Logger.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OS-X-Logger/OS-X-Logger.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>037E59FDC1C6B6EECE4414ECBE4CF6923EA9CB6A</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Eltrien/OS-X-Logger.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>037E59FDC1C6B6EECE4414ECBE4CF6923EA9CB6A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>037E59FDC1C6B6EECE4414ECBE4CF6923EA9CB6A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OS-X-Logger</string>
+		</dict>
+	</array>
+</dict>
+</plist>

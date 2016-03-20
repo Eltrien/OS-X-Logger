@@ -7,8 +7,26 @@
 //
 
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-int main(int argc, const char * argv[]) {
-    printf("Hello, World!\n");
+#include "Daemon/daemon.c"
+#include "Agent/agent.c"
+
+int main(int argc, const char **argv) {
+    int pid;
+    pid = fork();
+    printf("pid = %i",pid);
+    if (pid == -1){
+        printf("fork was not created");
+    }
+    else if (pid == 0){
+        printf("fork was created\n");
+        agentinit();
+    }
+    else{
+        daemoninit();
+    }
     return 0;
 }

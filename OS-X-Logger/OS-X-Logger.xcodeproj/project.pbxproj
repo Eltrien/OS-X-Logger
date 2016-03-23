@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		6A4710981C907F3200B1E727 /* Daemon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Daemon; sourceTree = "<group>"; };
 		6A47109D1C9E032400B1E727 /* Agent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Agent; sourceTree = "<group>"; };
+		6A4710A01CA2A80E00B1E727 /* OS-X-Logger-Daemon.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OS-X-Logger-Daemon.plist"; sourceTree = "<group>"; };
 		6ACA73651C8F27C60059AEB0 /* OS-X-Logger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OS-X-Logger"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACA73681C8F27C60059AEB0 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +63,7 @@
 				6A47109D1C9E032400B1E727 /* Agent */,
 				6A4710981C907F3200B1E727 /* Daemon */,
 				6ACA73681C8F27C60059AEB0 /* main.c */,
+				6A4710A01CA2A80E00B1E727 /* OS-X-Logger-Daemon.plist */,
 			);
 			path = "OS-X-Logger";
 			sourceTree = "<group>";

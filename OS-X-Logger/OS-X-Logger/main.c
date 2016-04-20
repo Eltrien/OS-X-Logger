@@ -19,14 +19,14 @@ int main(int argc, const char **argv) {
     pid_t pid = fork();
     printf("pid = %i\n",pid);
     if (pid == -1){
-        printf("fork was not created");
+        printf("fork was not created\n");
     }
     else if (pid == 0){
         printf("fork was created\n");
         agentinit();
     }
     else{
-        printf("demon");
+        printf("demon\n");
         daemoninit();
     }
     /*switch (fork()) {

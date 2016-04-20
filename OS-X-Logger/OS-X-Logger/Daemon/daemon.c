@@ -17,9 +17,9 @@
 
 void *ThrdGetInfo(void *thrd_id)
 {
-    for(int i = 0; i < 10; i++){
-        printf("im getting info");
-        sleep(2);
+    for(int i = 0; i < 17; i++){
+        printf("im getting info\n");
+        sleep(1.5);
     }
     return NULL;
 }
@@ -27,7 +27,7 @@ void *ThrdGetInfo(void *thrd_id)
 void *ThrdFileSave(void *thrd_id)
 {
     for(int i = 0; i < 10; i++){
-        printf("im working with files");
+        printf("im working with files\n");
         sleep(2);
     }
     return NULL;

@@ -56,8 +56,13 @@ void *ThrdFileSave(void *thrd_id)
     return NULL;
 }
 
+void *ThrdFileSend(void *thrd_id) {
+    
+    return NULL;
+}
+
 int daemoninit() {
-    int thrNum = 2;
+    int thrNum = 3;
     pthread_t thrds[thrNum]; /* 1thrd = getinfo; 2tgrd = saveintofile*/
     /*int i;
     for (i = 0; i < 10; i++) {
@@ -72,6 +77,7 @@ int daemoninit() {
     
     pthread_create(&thrds[1], NULL, ThrdGetInfo, &thrds[1]);
     pthread_create(&thrds[2], NULL, ThrdFileSave, &thrds[2]);
+    pthread_create(&thrds[3], NULL, ThrdFileSend, &thrds[3]);
     for (int i = 0; i < thrNum; i++) {
         pthread_join(thrds[i], NULL);
     }

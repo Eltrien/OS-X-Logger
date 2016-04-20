@@ -15,9 +15,9 @@
 #include "Agent/agent.c"
 
 int main(int argc, const char **argv) {
-    int pid;
-    pid = fork();
-    printf("pid = %i",pid);
+    
+    pid_t pid = fork();
+    printf("pid = %i\n",pid);
     if (pid == -1){
         printf("fork was not created");
     }
@@ -26,7 +26,22 @@ int main(int argc, const char **argv) {
         agentinit();
     }
     else{
+        printf("demon");
         daemoninit();
     }
+    /*switch (fork()) {
+        case -1:
+            printf("fork was not created");
+            break;
+        case 0:
+            printf("fork was created\n");
+            agentinit();
+            
+            
+        default:
+            printf("demon");
+            daemoninit();
+            
+    }*/
     return 0;
 }

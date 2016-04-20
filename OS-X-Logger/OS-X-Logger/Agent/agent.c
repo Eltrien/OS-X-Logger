@@ -3,7 +3,7 @@
 int agentinit() {
     for (int i = 0; i < 10; i++){
         printf("im agent ");
-        sleep(2);
+        sleep(1);
     }
     return 0;
 }

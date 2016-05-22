@@ -24,7 +24,7 @@ int servermain() {
                                             Granici zapisi dannih predopredeleni) i Raw socket (obespechivaet vozmoshnost' polzovatel'skogo 
                                             dostupa k nizleshaschim kommunikacionnim protokolam, poddershivauschim soket-abstrakcii)*/
     if (sid == -1) {
-        printf("[error]\tCould not create socket\n");
+        printf("[Error]\tServer can't create socket\n");
     }
 
     // Prepare the sockaddr_in structure
@@ -34,7 +34,7 @@ int servermain() {
     
     // Bind
     if (bind(sid, (struct sockaddr *)&server, sizeof(server)) < 0) {
-        printf("[error]\tBind failed\n");
+        printf("[Error]\tServar failed the binding\n");
         return 1;
     }
 
@@ -48,27 +48,27 @@ int servermain() {
 
     while ((client_sock = accept(sid, (struct sockaddr *)&client,(socklen_t *)&c))) {
         if (client_sock == -1) {
-            printf("Waiting for incoming connections...\n");
+            printf("\t\tWaiting for incoming connections...\n");
         }
         else {
             //printf("clsock = %i\n", client_sock);
-            printf("Connection accepted\n");
-            printf("IP address is: %s\n", inet_ntoa(client.sin_addr));
+            //printf("Connection accepted\n");
+            printf("\t\tIP address is: %s\n", inet_ntoa(client.sin_addr));
 
             if (pthread_create(&thread, NULL, connection_handler,
                            (void *)&client_sock) < 0) {
-                perror("[Error]\tCould not create thread\n");
+                perror("[Error]\tServer can't create thread\n");
                 return 1;
             }
 
-            printf("Handler assigned\n");
+            //printf("Handler assigned\n");
         }
         
         
     }
 
     if (client_sock < 0) {
-        printf("[Error]\tAccept failed");
+        printf("[Error]\tServer failed to accept connection");
         return 1;
     }
 
@@ -80,8 +80,8 @@ void *connection_handler(void *socket_desc) {
     //printf("qwerty\n\n");
     int sock = *(int *)socket_desc;
     int read_size;
-    int message_size = 1024;
-    char *message, *filename;
+    int message_size = 2024;
+    //char *message, *filename;
     char client_message[message_size];
     //read_size = recv(sock, client_message, message_size, 0);
     //filename = get_name_by_current_time();
@@ -91,42 +91,34 @@ void *connection_handler(void *socket_desc) {
     //int i = 0;
     int testFile = open("/Users/Shared/server.tmp", O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH);
     if(testFile < 0) {
-        printf("[Error] Failed to open file!\n");
+        printf("[Error]\tServer failed to open file\n");
     }
     else {
-        printf("File opened\n");
+        //printf("File opened\n");
         while ((read_size = recv(sock, client_message, message_size, 0)) > 0) {
             //printf("size = %i\n", sizeof(client_message));
-            //printf("My Message = %s\n", client_message);
+            printf("\t\tMy Message = %s\n", client_message);
             //char mess[read_size]
-            if(write(testFile, strcat(client_message, "\n"), read_size + 1) != read_size + 1)
-            {
-                write(2, "writing error\n", 40);
+            if(strcmp(client_message, "")){
+                if(write(testFile, strcat(client_message, "\n"), read_size + 1) != read_size + 1)
+                {
+                    write(2, "[Error]\tServer can't write file\n", 40);
+                }
+                else {
+                    printf("[Note]\tServer updated file\n");
+                }
             }
-            else {
-                printf("File written\n");
+            else{
+                printf("[Warn]\tNull was sent\n");
             }
         }
     memset(client_message, 0, message_size);
     }
     if(close(testFile) < 0) {
-        printf("File didnt close\n");
+        printf("[Error]\tServer can't close file\n");
     }
     else {
-        printf("File closed\n");
+        //printf("File closed\n");
     }
     return 0;
-}
-
-char *get_name_by_current_time() {
-    int buffer_size = 100;
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
-
-    char *buff = (char *)malloc(sizeof(char) * buffer_size);
-    memset(buff, 0, buffer_size);
-    snprintf(buff, buffer_size, "%d-%d-%d-%d:%d:%d.tar.gz", tm.tm_year + 1900,
-             tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
-
-    return buff;
 }

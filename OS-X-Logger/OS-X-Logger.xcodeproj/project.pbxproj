@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		29EAB9121CEF861A00276CA5 /* Server */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Server; sourceTree = "<group>"; };
 		6A4710981C907F3200B1E727 /* Daemon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Daemon; sourceTree = "<group>"; };
 		6A47109D1C9E032400B1E727 /* Agent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Agent; sourceTree = "<group>"; };
 		6A4710A01CA2A80E00B1E727 /* OS-X-Logger-Daemon.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "OS-X-Logger-Daemon.plist"; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		6ACA73671C8F27C60059AEB0 /* OS-X-Logger */ = {
 			isa = PBXGroup;
 			children = (
+				29EAB9121CEF861A00276CA5 /* Server */,
 				6A47109D1C9E032400B1E727 /* Agent */,
 				6A4710981C907F3200B1E727 /* Daemon */,
 				6ACA73681C8F27C60059AEB0 /* main.c */,

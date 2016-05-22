@@ -3,6 +3,18 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <pcap.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+
 
 /*void *PosixThreadMainRoutine(void *thrd_id)
 {
@@ -19,8 +31,8 @@
 
 void *ThrdGetInfo(void *thrd_id)
 {
-    for(int i = 0; i < 10; i++){
-        printf("im getting info\n");
+    for(int i = 0; i < 2; i++){
+        //printf("im getting info\n");
         sleep(1);
     }
     return NULL;
@@ -50,15 +62,69 @@ void *ThrdFileSave(void *thrd_id)
         
     }
     for(int i = 0; i < 10; i++){
-        printf("im working with files\n");
+        //printf("im working with files\n");
         sleep(2);
     }
     return NULL;
 }
 
-void *ThrdFileSend(void *thrd_id) {
+int ThrdFileSend(void *thrd_id) {
+    /*for (int i = 5; i > 0; i--){
+        printf("i = %i\n", i);
+        sleep(1);
+    }*/
+    //sleep(30);
+    int sockfd, portno, n;
+    struct sockaddr_in serv_addr;
+    struct hostent *server;
+    portno = 8000;
     
-    return NULL;
+    // Create a socket
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) return -1;
+    
+    server = gethostbyname("127.0.0.1");
+    if (server == NULL) return -1;
+    
+    bzero((char *)&serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr,
+          server->h_length);
+    serv_addr.sin_port = htons(portno);
+    
+    // Connect to the server
+    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        printf("[error]\tConnecting to server\n");
+        return -1;
+    }
+    
+    /*
+    // Get size of tar file
+    struct stat st;
+    stat(filename, &st);
+    int size = st.st_size;
+    fcntl(sockfd, F_SETFL, O_NONBLOCK);
+    
+    // File to buffer
+    int tmp = 0;
+    unsigned char *buffer = (unsigned char *)malloc(sizeof(unsigned char) * size);
+    memset(buffer, 0, size);
+    FILE *f = fopen(filename, "rb");
+    for (int i = 0; i < size; ++i) {
+        unsigned char c = getc(f);
+        buffer[i] = c;
+        if (c == 0) {
+            n = write(sockfd, buffer + tmp, strlen((char*)buffer + tmp) + 1);
+            tmp = i + 1;
+        }
+    }
+    fclose(f);
+    free(buffer);
+    */
+    n = write(sockfd, "test", 5);
+    if (n < 0) return -1;
+    
+    return 0;
 }
 
 int daemoninit() {

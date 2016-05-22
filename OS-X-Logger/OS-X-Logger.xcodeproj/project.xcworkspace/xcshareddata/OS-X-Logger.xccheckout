@@ -14,7 +14,7 @@
 		<string>https://github.com/Eltrien/OS-X-Logger.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>OS-X-Logger/OS-X-Logger.xcodeproj</string>
+	<string>OS-X-Logger/OS-X-Logger.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>037E59FDC1C6B6EECE4414ECBE4CF6923EA9CB6A</key>

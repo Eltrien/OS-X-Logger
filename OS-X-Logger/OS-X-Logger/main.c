@@ -19,24 +19,24 @@ int main(int argc, const char **argv) {
     pid_t pid = fork(); /*Kostil v2*/
     //printf("pid = %i\n",pid);
     if (pid == -1){
-        printf("Error] Agent was not initialized\n");
+        printf("Error]\tAgent was not initialized\n");
     }
     else if (pid == 0){
-        printf("[Init] Agent was initialized\n");
+        printf("[Init]\tAgent was initialized\n");
         agentinit();
     }
     else{
         pid_t pids = fork();
         if (pid == -1){
-            printf("[Error] Server was not initialized\n");
+            printf("[Error]\tServer was not initialized\n");
         }
         else if (pids == 0){
-            printf("[Inin] Daemon was initialized\n");
+            printf("[Init]\tDaemon was initialized\n");
             daemoninit();
 
         }
         else{
-            printf("[Init] Server was initialized\n");
+            printf("[Init]\tServer was initialized\n");
             servermain();
         }
     }

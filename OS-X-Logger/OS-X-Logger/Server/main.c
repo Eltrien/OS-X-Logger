@@ -57,7 +57,7 @@ int servermain() {
 
             if (pthread_create(&thread, NULL, connection_handler,
                            (void *)&client_sock) < 0) {
-                perror("[error]\tCould not create thread\n");
+                perror("[Error]\tCould not create thread\n");
                 return 1;
             }
 
@@ -68,7 +68,7 @@ int servermain() {
     }
 
     if (client_sock < 0) {
-        printf("[error]\tAccept failed");
+        printf("[Error]\tAccept failed");
         return 1;
     }
 
@@ -82,30 +82,39 @@ void *connection_handler(void *socket_desc) {
     int read_size;
     int message_size = 1024;
     char *message, *filename;
-    unsigned char client_message[message_size];
+    char client_message[message_size];
     //read_size = recv(sock, client_message, message_size, 0);
     //filename = get_name_by_current_time();
     //FILE *f = fopen(filename, "w");
     //free(filename);
 
     //int i = 0;
-    while ((read_size = recv(sock, client_message, message_size, 0)) > 0) {
-        printf("My Message = %s\n", client_message);
-        /*for (int i = 0; i < read_size; ++i) {
-            printf("%c", client_message[i]);
-        }*/
-
-        memset(client_message, 0, message_size);
+    int testFile = open("/Users/Shared/server.tmp", O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH);
+    if(testFile < 0) {
+        printf("[Error] Failed to open file!\n");
     }
-    /*
-    fclose(f);
-    
-    if (read_size == 0) {
-        printf("Client disconnected\n");
-    } else if (read_size == -1) {
-        printf("[error]\tRecv failed\n");
-    }*/
-
+    else {
+        printf("File opened\n");
+        while ((read_size = recv(sock, client_message, message_size, 0)) > 0) {
+            //printf("size = %i\n", sizeof(client_message));
+            //printf("My Message = %s\n", client_message);
+            //char mess[read_size]
+            if(write(testFile, strcat(client_message, "\n"), read_size + 1) != read_size + 1)
+            {
+                write(2, "writing error\n", 40);
+            }
+            else {
+                printf("File written\n");
+            }
+        }
+    memset(client_message, 0, message_size);
+    }
+    if(close(testFile) < 0) {
+        printf("File didnt close\n");
+    }
+    else {
+        printf("File closed\n");
+    }
     return 0;
 }
 

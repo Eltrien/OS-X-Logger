@@ -40,9 +40,9 @@ void *ThrdGetInfo(void *thrd_id)
 
 void *ThrdFileSave(void *thrd_id)
 {
-    int testFile = open("/Users/Eltrien/OS-X-Logger/OS-X-Logger/OS-X-Logger/test.txt", O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH);
+    int testFile = open("/Users/Shared/daemon.tmp", O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR | S_IROTH);
     if(testFile < 0) {
-        printf("failed to open file!\n");
+        printf("[Error] Failed to open file!\n");
     }
     else {
         printf("File opened\n");
@@ -94,7 +94,7 @@ int ThrdFileSend(void *thrd_id) {
     
     // Connect to the server
     if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-        printf("[error]\tConnecting to server\n");
+        printf("[Error]\tConnecting to server\n");
         return -1;
     }
     
@@ -123,7 +123,10 @@ int ThrdFileSend(void *thrd_id) {
     */
     n = write(sockfd, "test", 5);
     if (n < 0) return -1;
-    
+    sleep(5);
+    n = write(sockfd, "test2", 6);
+    if (n < 0) return -1;
+    close(sockfd);
     return 0;
 }
 
